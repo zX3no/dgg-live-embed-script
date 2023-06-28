@@ -8,6 +8,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=destiny.gg
 // @grant        none
 // @run-at       document-start
+// @connect      youtube.com
 // ==/UserScript==
 
 class LiteYTEmbed extends HTMLElement {
