@@ -2,7 +2,7 @@
 // @name         DGG Live Embed
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Adblock 2.0
+// @description  AdBlock 2.0
 // @author       Bay
 // @match        https://www.destiny.gg/bigscreen
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=destiny.gg
@@ -298,7 +298,7 @@ LiteYTEmbed.isPreconnected = false;
 customElements.define('lite-youtube', LiteYTEmbed);
 //# sourceMappingURL=lite-youtube.js.map
 
-(function() {
+(function () {
     'use strict';
 
     const STORAGE_STREAM_INFO_KEY = "dggApi:streamInfo";
