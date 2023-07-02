@@ -8,6 +8,8 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=destiny.gg
 // @grant        none
 // @run-at       document-start
+// @downloadURL  https://github.com/zX3no/dgg-live-embed-script/raw/main/dgg-live-embed.user.js
+// @homepageURL  https://github.com/zX3no/dgg-live-embed-script
 // ==/UserScript==
 
 class LiteYTEmbed extends HTMLElement {
