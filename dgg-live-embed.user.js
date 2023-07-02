@@ -2,13 +2,12 @@
 // @name         DGG Live Embed
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  AdBlock 2.0
+// @description  Adblock 2.0
 // @author       Bay
 // @match        https://www.destiny.gg/bigscreen
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=destiny.gg
 // @grant        none
 // @run-at       document-start
-// @connect      youtube.com
 // ==/UserScript==
 
 class LiteYTEmbed extends HTMLElement {
@@ -325,7 +324,9 @@ customElements.define('lite-youtube', LiteYTEmbed);
         let embed = document.querySelector("#embed");
         if (embed) {
             let text = document.querySelector("#offline-text");
+            let stream_block = document.querySelector("#stream-block");
             text.remove();
+            stream_block.remove();
 
             let liteYoutube = document.createElement("lite-youtube");
 
