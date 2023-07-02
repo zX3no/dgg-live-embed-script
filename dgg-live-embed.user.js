@@ -9,6 +9,7 @@
 // @grant        none
 // @run-at       document-start
 // @downloadURL  https://github.com/zX3no/dgg-live-embed-script/raw/main/dgg-live-embed.user.js
+// @updateURL  https://github.com/zX3no/dgg-live-embed-script/raw/main/dgg-live-embed.user.js
 // @homepageURL  https://github.com/zX3no/dgg-live-embed-script
 // ==/UserScript==
 
@@ -311,11 +312,11 @@ customElements.define('lite-youtube', LiteYTEmbed);
     }
 
     function injectScript() {
-        let youtube_live = streamInfo.streams?.youtube?.live;
-        let kick_live = streamInfo.streams?.kick?.live;
+        let youtubeLive = streamInfo.streams?.youtube?.live;
+        let kickLive = streamInfo.streams?.kick?.live;
 
         //Return if neither are live.
-        if (!(youtube_live || kick_live)) {
+        if (!(youtubeLive || kickLive)) {
             return;
         }
 
@@ -329,7 +330,7 @@ customElements.define('lite-youtube', LiteYTEmbed);
         document.querySelector("#offline-text").remove();
         document.querySelector("#stream-block").remove();
 
-        if (youtube_live) {
+        if (youtubeLive) {
             let id = streamInfo.streams?.youtube?.id;
 
             if (!id) {
