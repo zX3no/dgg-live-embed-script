@@ -300,8 +300,7 @@ customElements.define('lite-youtube', LiteYTEmbed);
 (function () {
     'use strict';
 
-    const STORAGE_STREAM_INFO_KEY = "dggApi:streamInfo";
-    const STORAGE_HOST_INFO_KEY = "dggApi:hosting";
+    const streamInfo = JSON.parse(localStorage.getItem("dggApi:streamInfo"));
 
     if (document.readyState !== "loading") {
         injectScript();
@@ -310,43 +309,42 @@ customElements.define('lite-youtube', LiteYTEmbed);
     }
 
     function injectScript() {
-        if (isLive()) {
-            let id = getYTStreamId();
-            hijackEmbed(id);
-        } else {
-            console.log("Streamer is not live");
-            hijackEmbed("5uSiCzrSszY");
-        }
-    }
+        let youtube_live = streamInfo.streams?.youtube?.live;
+        let kick_live = streamInfo.streams?.kick?.live;
 
-    function hijackEmbed(id) {
+        //Return if neither are live.
+        if (!(youtube_live || kick_live)) {
+            console.log("Streamer is offline");
+            return;
+        }
+
         let embed = document.querySelector("#embed");
 
-        if (embed) {
-            let text = document.querySelector("#offline-text");
-            let stream_block = document.querySelector("#stream-block");
-            text.remove();
-            stream_block.remove();
+        if (!embed) {
+            return;
+        }
 
+        //Remove elements that block the embed.
+        document.querySelector("#offline-text").remove();
+        document.querySelector("#stream-block").remove();
+
+        if (youtube_live) {
+            let id = streamInfo.streams?.youtube?.id;
+            if (!id) {
+                return;
+            }
             let liteYoutube = document.createElement("lite-youtube");
             liteYoutube.setAttribute("videoid", id);
             liteYoutube.id = "embed";
-
             embed.parentNode.replaceChild(liteYoutube, embed);
 
-            let player = document.querySelector('#embed');
-            player.shadowRoot.querySelector("#playButton").click();
+            //Automatically start playing the stream if live.
+            document.querySelector('#embed').shadowRoot.querySelector("#playButton").click();
+        } else {
+            let kick = document.createElement("iframe");
+            kick.src = "https://player.kick.com/destiny";
+            kick.style = "width:100%;aspect-ratio:16/9"
+            embed.parentNode.replaceChild(kick, embed);
         }
     }
-
-    function isLive() {
-        const streamInfo = JSON.parse(localStorage.getItem(STORAGE_STREAM_INFO_KEY));
-        return streamInfo && (streamInfo?.streams?.youtube?.live || false);
-    }
-
-    function getYTStreamId() {
-        const streamInfo = JSON.parse(localStorage.getItem(STORAGE_STREAM_INFO_KEY));
-        return streamInfo.streams.youtube.id;
-    }
-
 })();
