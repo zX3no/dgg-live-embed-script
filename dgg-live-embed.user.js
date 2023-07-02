@@ -322,6 +322,7 @@ customElements.define('lite-youtube', LiteYTEmbed);
 
     function hijackEmbed(id) {
         let embed = document.querySelector("#embed");
+
         if (embed) {
             let text = document.querySelector("#offline-text");
             let stream_block = document.querySelector("#stream-block");
@@ -329,11 +330,13 @@ customElements.define('lite-youtube', LiteYTEmbed);
             stream_block.remove();
 
             let liteYoutube = document.createElement("lite-youtube");
-
             liteYoutube.setAttribute("videoid", id);
             liteYoutube.id = "embed";
 
             embed.parentNode.replaceChild(liteYoutube, embed);
+
+            let player = document.querySelector('#embed');
+            player.shadowRoot.querySelector("#playButton").click();
         }
     }
 
