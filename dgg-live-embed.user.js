@@ -342,15 +342,16 @@ customElements.define('lite-youtube', LiteYTEmbed);
 
             let liteYoutube = document.createElement("lite-youtube");
             liteYoutube.setAttribute("videoid", id);
-            liteYoutube.id = "embed";
+            liteYoutube.id = "youtube-embed";
             embed.parentNode.replaceChild(liteYoutube, embed);
 
             //Automatically start playing the stream if live.
-            document.querySelector('#embed').shadowRoot.querySelector("#playButton").click();
+            document.querySelector('#youtube-embed').shadowRoot.querySelector("#playButton").click();
         } else {
             let kick = document.createElement("iframe");
             kick.src = "https://player.kick.com/destiny";
             kick.style = "width:100%;aspect-ratio:16/9"
+            kick.id = "kick-embed";
             embed.parentNode.replaceChild(kick, embed);
         }
     }
