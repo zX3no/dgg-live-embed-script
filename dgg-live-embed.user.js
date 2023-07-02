@@ -303,6 +303,8 @@ customElements.define('lite-youtube', LiteYTEmbed);
 (function () {
     'use strict';
 
+    //TODO: Poll `streamInfo` so Kick can be displayed when YouTube goes offline or vice versa.
+    //If the stream goes offline you'll need to refresh the page to fix other embeds.
     const streamInfo = JSON.parse(localStorage.getItem("dggApi:streamInfo"));
 
     if (document.readyState !== "loading") {
@@ -327,6 +329,7 @@ customElements.define('lite-youtube', LiteYTEmbed);
         }
 
         //Remove elements that block the embed.
+        //TODO: Hide instead of remove so they can be restored later.
         document.querySelector("#offline-text").remove();
         document.querySelector("#stream-block").remove();
 
