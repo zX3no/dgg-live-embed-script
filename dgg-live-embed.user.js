@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DGG Live Embed
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.0
 // @description  Adblock 2.0
 // @author       Bay
 // @match        https://www.destiny.gg/bigscreen
@@ -9,7 +9,7 @@
 // @grant        none
 // @run-at       document-start
 // @downloadURL  https://github.com/zX3no/dgg-live-embed-script/raw/main/dgg-live-embed.user.js
-// @updateURL  https://github.com/zX3no/dgg-live-embed-script/raw/main/dgg-live-embed.user.js
+// @updateURL    https://github.com/zX3no/dgg-live-embed-script/raw/main/dgg-live-embed.user.js
 // @homepageURL  https://github.com/zX3no/dgg-live-embed-script
 // ==/UserScript==
 
