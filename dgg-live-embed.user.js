@@ -296,7 +296,6 @@ class LiteYTEmbed extends HTMLElement {
 }
 LiteYTEmbed.isPreconnected = false;
 customElements.define('lite-youtube', LiteYTEmbed);
-//# sourceMappingURL=lite-youtube.js.map
 
 (function () {
     'use strict';
