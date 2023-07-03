@@ -313,7 +313,6 @@ customElements.define('lite-youtube', LiteYTEmbed);
         //TODO: Poll `streamInfo` so Kick can be displayed when YouTube goes offline or vice versa.
         //If the stream goes offline you'll need to refresh the page to fix other embeds.
         const streamInfo = JSON.parse(localStorage.getItem("dggApi:streamInfo"));
-
         let youtubeLive = streamInfo.streams?.youtube?.live;
         let kickLive = streamInfo.streams?.kick?.live;
 
@@ -323,30 +322,48 @@ customElements.define('lite-youtube', LiteYTEmbed);
             return;
         }
 
-        let embed = document.querySelector("#embed");
+        let pillName = document.querySelector("#host-pill-name");
 
-        if (!embed) {
-            console.log("error: failed to find embed");
-            return;
-        }
+        //Watch for changes in pillName.
+        let observer = new MutationObserver(function (mutationsList, observer) {
+            if (pillName.innerHTML != "destiny") {
+                //User is embedding another stream
+                let youtube = document.querySelector('#youtube-embed');
+                let kick = document.querySelector('#kick-embed');
+                if (kick) {
+                    kick.style.display = "none";
+                }
+                if (youtube) {
+                    youtube.style.display = "none";
+                }
+            } else {
+                //User is watching either Kick or Youtube.
+                let youtube = document.querySelector('#youtube-embed');
+                let kick = document.querySelector('#kick-embed');
+                if (kick) {
+                    kick.style.display = "block";
+                }
+                if (youtube) {
+                    youtube.style.display = "block";
+                }
+            }
+        });
+
+        observer.observe(pillName, { characterData: false, childList: true, attributes: false });
+
+        let embed = document.querySelector("#embed");
 
         //Remove elements that block the embed.
         //TODO: Hide instead of remove so they can be restored later.
-        document.querySelector("#offline-text").remove();
-        document.querySelector("#stream-block").remove();
+        document.querySelector("#offline-text").style.display = "none";
+        document.querySelector("#stream-block").style.display = "none";
 
         if (youtubeLive) {
             let id = streamInfo.streams?.youtube?.id;
-
-            if (!id) {
-                console.log("error: failed to find youtube id");
-                return;
-            }
-
-            let liteYoutube = document.createElement("lite-youtube");
-            liteYoutube.setAttribute("videoid", id);
-            liteYoutube.id = "youtube-embed";
-            embed.parentNode.replaceChild(liteYoutube, embed);
+            let youtube = document.createElement("lite-youtube");
+            youtube.setAttribute("videoid", id);
+            youtube.id = "youtube-embed";
+            embed.appendChild(youtube);
 
             //Automatically start playing the stream if live.
             document.querySelector('#youtube-embed').shadowRoot.querySelector("#playButton").click();
@@ -355,7 +372,7 @@ customElements.define('lite-youtube', LiteYTEmbed);
             kick.src = "https://player.kick.com/destiny";
             kick.style = "width:100%;aspect-ratio:16/9"
             kick.id = "kick-embed";
-            embed.parentNode.replaceChild(kick, embed);
+            embed.appendChild(kick);
         }
     }
 })();

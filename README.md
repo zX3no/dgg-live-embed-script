@@ -72,8 +72,6 @@ If the YouTube stream goes down it won't automatically switch to Kick.
 
 If Destiny goes offline it will still display the embeded stream. A refresh will fix this.
 
-Embedding another stream while Destiny is live does not work.
-
 ---
 
 Shout-out to [vyneer](https://github.com/vyneer) for his userscripts.
