@@ -353,8 +353,7 @@ customElements.define('lite-youtube', LiteYTEmbed);
 
         let embed = document.querySelector("#embed");
 
-        //Remove elements that block the embed.
-        //TODO: Hide instead of remove so they can be restored later.
+        //Hide elements that block the embed.
         document.querySelector("#offline-text").style.display = "none";
         document.querySelector("#stream-block").style.display = "none";
 
