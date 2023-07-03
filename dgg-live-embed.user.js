@@ -319,12 +319,14 @@ customElements.define('lite-youtube', LiteYTEmbed);
 
         //Return if neither are live.
         if (!(youtubeLive || kickLive)) {
+            console.log("info: Streamer is offline");
             return;
         }
 
         let embed = document.querySelector("#embed");
 
         if (!embed) {
+            console.log("error: failed to find embed");
             return;
         }
 
@@ -337,6 +339,7 @@ customElements.define('lite-youtube', LiteYTEmbed);
             let id = streamInfo.streams?.youtube?.id;
 
             if (!id) {
+                console.log("error: failed to find youtube id");
                 return;
             }
 
