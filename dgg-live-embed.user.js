@@ -303,10 +303,6 @@ customElements.define('lite-youtube', LiteYTEmbed);
 (function () {
     'use strict';
 
-    //TODO: Poll `streamInfo` so Kick can be displayed when YouTube goes offline or vice versa.
-    //If the stream goes offline you'll need to refresh the page to fix other embeds.
-    const streamInfo = JSON.parse(localStorage.getItem("dggApi:streamInfo"));
-
     if (document.readyState !== "loading") {
         injectScript();
     } else {
@@ -314,12 +310,16 @@ customElements.define('lite-youtube', LiteYTEmbed);
     }
 
     function injectScript() {
+        //TODO: Poll `streamInfo` so Kick can be displayed when YouTube goes offline or vice versa.
+        //If the stream goes offline you'll need to refresh the page to fix other embeds.
+        const streamInfo = JSON.parse(localStorage.getItem("dggApi:streamInfo"));
+
         let youtubeLive = streamInfo.streams?.youtube?.live;
         let kickLive = streamInfo.streams?.kick?.live;
 
         //Return if neither are live.
         if (!(youtubeLive || kickLive)) {
-            console.log("info: Streamer is offline");
+            console.log("info: streamer is offline");
             return;
         }
 
