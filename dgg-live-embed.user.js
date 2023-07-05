@@ -316,62 +316,80 @@ customElements.define('lite-youtube', LiteYTEmbed);
         let youtubeLive = streamInfo.streams?.youtube?.live;
         let kickLive = streamInfo.streams?.kick?.live;
 
+        removeBlock();
+
         //Return if neither are live.
         if (!(youtubeLive || kickLive)) {
             console.log("info: streamer is offline");
             return;
         }
 
+        //Prefer YouTube over Kick.
+        if (youtubeLive && kickLive) {
+            kickLive = false;
+        }
+
         let pillName = document.querySelector("#host-pill-name");
+        let embed = document.querySelector("#embed");
 
         //Watch for changes in pillName.
+        //Hiding doesn't work. Because the audio will still play.
         let observer = new MutationObserver(function (mutationsList, observer) {
             if (pillName.innerHTML != "destiny") {
                 //User is embedding another stream
-                let youtube = document.querySelector('#youtube-embed');
-                let kick = document.querySelector('#kick-embed');
-                if (kick) {
-                    kick.style.display = "none";
+                if (kickLive) {
+                    document.querySelector('#kick-embed').remove();
                 }
-                if (youtube) {
-                    youtube.style.display = "none";
+                if (youtubeLive) {
+                    document.querySelector('#youtube-embed').remove();
                 }
             } else {
                 //User is watching either Kick or Youtube.
-                let youtube = document.querySelector('#youtube-embed');
-                let kick = document.querySelector('#kick-embed');
-                if (kick) {
-                    kick.style.display = "block";
+                if (youtubeLive && !document.querySelector('#youtube-embed')) {
+                    youtube(embed, streamInfo);
                 }
-                if (youtube) {
-                    youtube.style.display = "block";
+                if (kickLive && !document.querySelector('#kick-embed')) {
+                    kick(embed);
                 }
             }
         });
 
         observer.observe(pillName, { characterData: false, childList: true, attributes: false });
 
-        let embed = document.querySelector("#embed");
-
-        //Hide elements that block the embed.
+        //Hide the text.
         document.querySelector("#offline-text").style.display = "none";
-        document.querySelector("#stream-block").style.display = "none";
 
         if (youtubeLive) {
-            let id = streamInfo.streams?.youtube?.id;
-            let youtube = document.createElement("lite-youtube");
-            youtube.setAttribute("videoid", id);
-            youtube.id = "youtube-embed";
-            embed.appendChild(youtube);
+            youtube(embed, streamInfo);
+        }
+        if (kickLive) {
+            kick(embed);
+        }
+    }
+    function youtube(embed, streamInfo) {
+        removeBlock();
+        let id = streamInfo.streams?.youtube?.id;
+        let youtube = document.createElement("lite-youtube");
+        youtube.setAttribute("videoid", id);
+        youtube.id = "youtube-embed";
+        embed.appendChild(youtube);
 
-            //Automatically start playing the stream if live.
-            document.querySelector('#youtube-embed').shadowRoot.querySelector("#playButton").click();
-        } else {
-            let kick = document.createElement("iframe");
-            kick.src = "https://player.kick.com/destiny";
-            kick.style = "width:100%;aspect-ratio:16/9"
-            kick.id = "kick-embed";
-            embed.appendChild(kick);
+        //Automatically start playing the stream if live.
+        document.querySelector('#youtube-embed').shadowRoot.querySelector("#playButton").click();
+    }
+    function kick(embed) {
+        removeBlock();
+        let kick = document.createElement("iframe");
+        kick.src = "https://player.kick.com/destiny";
+        kick.style = "width:100%;aspect-ratio:16/9"
+        kick.id = "kick-embed";
+        embed.appendChild(kick);
+    }
+    function removeBlock() {
+        //Remove the stream block.
+        let block = document.querySelector("#stream-block");
+        if (block) {
+            block.remove();
         }
     }
 })();
