@@ -303,13 +303,6 @@ customElements.define('lite-youtube', LiteYTEmbed);
 (function () {
     'use strict';
 
-    //HACK: Refresh the browser ONCE to force localStorage to update.
-    //This is unbelievably fucking stupid.
-    if (!sessionStorage.getItem("refresh")) {
-        sessionStorage.setItem("refresh", false);
-        location.reload();
-    }
-
     if (document.readyState !== "loading") {
         injectScript();
     } else {
@@ -317,6 +310,13 @@ customElements.define('lite-youtube', LiteYTEmbed);
     }
 
     function injectScript() {
+        //HACK: Refresh the browser ONCE to force localStorage to update.
+        //This is unbelievably fucking stupid.
+        if (!sessionStorage.getItem("refresh")) {
+            sessionStorage.setItem("refresh", false);
+            location.reload();
+        }
+
         //TODO: Poll `streamInfo` so Kick can be displayed when YouTube goes offline or vice versa.
         //If the stream goes offline you'll need to refresh the page to fix other embeds.
         const streamInfo = JSON.parse(localStorage.getItem("dggApi:streamInfo"));
