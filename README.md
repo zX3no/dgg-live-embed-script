@@ -68,8 +68,6 @@ Refresh.
 
 ## Issues
 
-When loading the stream for the first time(after a reboot), the script does not load. A refresh will fix this.
-
 If the YouTube stream goes down it won't automatically switch to Kick. A refresh should fix this.
 
 If Destiny goes offline it will still display the embeded stream. A refresh will fix this.

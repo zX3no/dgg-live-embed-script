@@ -303,6 +303,13 @@ customElements.define('lite-youtube', LiteYTEmbed);
 (function () {
     'use strict';
 
+    //HACK: Refresh the browser ONCE to force localStorage to update.
+    //This is unbelievably fucking stupid.
+    if (!sessionStorage.getItem("refresh")) {
+        sessionStorage.setItem("refresh", false);
+        location.reload();
+    }
+
     if (document.readyState !== "loading") {
         injectScript();
     } else {
