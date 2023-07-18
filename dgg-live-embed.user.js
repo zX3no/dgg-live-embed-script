@@ -16,27 +16,29 @@
 (function () {
     'use strict';
 
-    if (document.readyState !== "loading") {
-        injectScript();
-    } else {
-        document.addEventListener("DOMContentLoaded", injectScript);
+    //TODO: Poll `streamInfo` so Kick can be displayed when YouTube goes offline or vice versa.
+    //If the stream goes offline you'll need to refresh the page to fix other embeds.
+    async function getStreamInfo() {
+        const response = await fetch("https://www.destiny.gg/api/info/stream");
+        const json = await response.json();
+        return json.data;
     }
 
-    function injectScript() {
-        //HACK: Refresh the browser to force localStorage to update.
-        //This is unbelievably fucking stupid and it doesn't even work.
-        let refresh = parseInt(sessionStorage.getItem("refresh"));
-        if (!refresh) {
-            sessionStorage.setItem("refresh", Number(0));
-        }
-        if (refresh < 2) {
-            sessionStorage.setItem("refresh", Number(refresh + 1));
-            location.reload();
-        }
+    let promise = getStreamInfo();
 
-        //TODO: Poll `streamInfo` so Kick can be displayed when YouTube goes offline or vice versa.
-        //If the stream goes offline you'll need to refresh the page to fix other embeds.
-        const streamInfo = JSON.parse(localStorage.getItem("dggApi:streamInfo"));
+    if (document.readyState !== "loading") {
+        promise.then((streamInfo) => {
+            injectScript(streamInfo);
+        });
+    } else {
+        document.addEventListener("DOMContentLoaded", promise.then((streamInfo) => {
+            injectScript(streamInfo);
+        }));
+    }
+
+    function injectScript(streamInfo) {
+        console.log(streamInfo);
+
         let youtubeLive = streamInfo.streams?.youtube?.live;
         let kickLive = streamInfo.streams?.kick?.live;
 
