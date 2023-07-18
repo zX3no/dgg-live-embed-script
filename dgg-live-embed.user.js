@@ -37,8 +37,6 @@
     }
 
     function injectScript(streamInfo) {
-        console.log(streamInfo);
-
         let youtubeLive = streamInfo.streams?.youtube?.live;
         let kickLive = streamInfo.streams?.kick?.live;
 
