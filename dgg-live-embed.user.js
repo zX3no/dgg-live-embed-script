@@ -313,6 +313,9 @@ customElements.define('lite-youtube', LiteYTEmbed);
         //HACK: Refresh the browser to force localStorage to update.
         //This is unbelievably fucking stupid and it doesn't even work.
         let refresh = parseInt(sessionStorage.getItem("refresh"));
+        if (!refresh) {
+            sessionStorage.setItem("refresh", Number(0));
+        }
         if (refresh < 2) {
             sessionStorage.setItem("refresh", Number(refresh + 1));
             location.reload();
