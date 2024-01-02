@@ -4,36 +4,34 @@
 
 > I'm about to say a whole bunch of
 > retarded shit that nobody believes in
-> anymore except for like I guess
-> developers over the age of 35 or something.
+> anymore except for developers over 
+> the age of 35 or something.
 >
 > The real reason why I don't use Adblock,
 > the real reason why I don't like these mute tabs on browsers,
-> the real reason why I don't like add-ons is
+> the real reason why I don't like add-ons is:
 > I believe, and I'm telling you all
 > this knowing this is a losing battle
-> nobody cares about it, et cetera et
-> cetera I understand that okay but at
+> nobody cares about it et cetera et
+> cetera. I understand that okay but at
 > this point I don't care I'm too dug in.
 >
 > The issue with that sort of
 > development environment is it encourages
 > everybody to be lazy in their
-> development and it fosters the sense of,
-> in order to properly browse or use
+> development and it fosters the sense that
+> in order to properly browse, or use
 > things on the internet there's a
 > requirement to download a third-party
-> apps to do it.
+> app to do it.
 >
 > Uh, I hate that fucking
-> mentality like in my opinion it's like
+> mentality, like in my opinion. It's like
 > muting tabs is bad design because there
 > should never ever ever be a tab that
-> plays audio that you're not aware of
-> right.
-> Like muting tabs shouldn't
-> exist but because it does, now developers
-> are less encouraged to like,
+> plays audio that you're not aware of right.
+> Muting tabs shouldn't exist but because 
+> it does, now developers are less encouraged to...
 > like you can always shift more and more problems
 > off onto either the end user or some other
 > third-party application to fix it.
@@ -42,15 +40,15 @@
 > fine they can just mute their tab or
 > like oh, there's something that's
 > annoying oh, that's okay, this doesn't
-> happen to people that use like the other
+> happen to people that use like, the other
 > app.
 >
 > I think that development environment has just
 > been like a cancer for literally all of the
 > fucking internet.
-> I think it's just it's made like
+> I think it's just made like
 > really really really bad
-> design habits in my opinion but what the
+> design habits in my opinion, but what the
 > fuck do I know.
 
 ## About
