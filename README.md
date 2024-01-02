@@ -13,20 +13,20 @@
 > I believe, and I'm telling you all
 > this knowing this is a losing battle
 > nobody cares about it et cetera et
-> cetera. I understand that okay but at
-> this point I don't care I'm too dug in.
+> cetera. I understand that okay, but at
+> this point I don't care, I'm too dug in.
 >
 > The issue with that sort of
 > development environment is it encourages
 > everybody to be lazy in their
 > development and it fosters the sense that
-> in order to properly browse, or use
+> in order to properly browse or use
 > things on the internet there's a
 > requirement to download a third-party
 > app to do it.
 >
 > Uh, I hate that fucking
-> mentality, like in my opinion. It's like
+> mentality, like in my opinion, it's like
 > muting tabs is bad design because there
 > should never ever ever be a tab that
 > plays audio that you're not aware of right.
